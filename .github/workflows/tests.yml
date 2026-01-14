@@ -6,11 +6,6 @@ on:
       - main
       - '*.x'
   pull_request:
-  schedule:
-    - cron: '0 0 * * *'
-
-permissions:
-  contents: read
 
 jobs:
   tests:
@@ -21,8 +16,6 @@ jobs:
       matrix:
         php: [8.3, 8.4]
 
-    name: PHP ${{ matrix.php }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,7 +24,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          extensions: dom, curl, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           coverage: none
 
       - name: Check PHP version
